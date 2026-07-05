@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: 'pages'
-  cancel-in-progress: false
+  cancel-in-progress: true  
 
 jobs:
   eslint:
@@ -35,26 +35,8 @@ jobs:
       - run: npm install
       - run: npm test -- --passWithNoTests
 
-      #    - name: Run E2E Puppeteer tests
-  #        run: |
-  #          cd frontend
-  #          # Убиваем всё, что заняло порт
-  #          sudo fuser -k 8080/tcp || true
-  #
-  #          # Собираем проект
-  #          npm run build
-  #
-  #          # Запускаем сервер на папке dist и просто оставляем его работать
-  #          npx serve dist -l 8080 &
-  #          sleep 5 # Даем серверу 5 секунд на запуск
-  #        env:
-  #          CI: true
-
   build:
     needs: [eslint, test]
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +52,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Указываем путь к папке dist внутри фронтенда
           path: 'dist'
 
       - name: Deploy to GitHub Pages
