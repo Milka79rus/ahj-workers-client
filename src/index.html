@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Workers App</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Блок Задачи 1: Скелетоны и Новости -->
+      <header>
+        <h1>Новости кинематографа</h1>
+        <button id="reload-btn">Обновить новости</button>
+      </header>
+
+      <div id="error-banner" class="error-banner hidden">
+        Не удалось загрузить данные. Проверьте подключение к интернету.
+      </div>
+
+      <div id="news-container" class="news-container"></div>
+
+      <hr class="separator" />
+
+      <!-- Блок Задачи 2*: Хешер файлов -->
+      <section class="hasher-section">
+        <h2>Хешер файлов (Web Worker)</h2>
+
+        <div class="hash-controls">
+          <label for="algo-select">Алгоритм хеширования: </label>
+          <select id="algo-select">
+            <option value="MD5">MD5</option>
+            <option value="SHA1">SHA1</option>
+            <option value="SHA256">SHA256</option>
+            <option value="SHA512">SHA512</option>
+          </select>
+        </div>
+
+        <div id="drop-zone" class="drop-zone">
+          <p>Перетащите файл сюда или <b>кликните</b> для выбора</p>
+          <input type="file" id="file-input" class="hidden" />
+        </div>
+
+        <div id="hash-result-box" class="hash-result-box hidden">
+          <p><b>Файл:</b> <span id="file-name"></span></p>
+          <p><b>Результат:</b> <code id="hash-output"></code></p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
